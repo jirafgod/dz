@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for event in events %}
+    {% include 'events.html' %}
+{% endfor %}
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function (){
+    $("#go").click(function(event){
+        event.preventDefault();
+        $.get({
+            url: "/user_add/"+$('#id').val(),
+            success: function (data){
+                if($("#bad").html()!=''){
+                    $("#good").html('<p>Уже там:</p><ul id="will"></ul>')
+                }
+                $("#will").append('<li class="us">'+data+'</li>');
+            }
+        });
+    }); 
+});
+</script>   
+{%endblock%}

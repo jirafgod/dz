@@ -1,0 +1,26 @@
+	<div class="text-center">
+    	<a {% if event.elect != 1 %} href="/event/{{ event.id }}"{% endif %} class="lead">{{ event.name }}</a>
+    	<p class="text-muted">Место проведения: {{ event.address }}</p>
+	</div>
+	<div class="caption {% if width != 100 %} text-center {% endif %}">
+    	<img src="{{ event.image.url }}" class="img-thumbnail" style="width: {{ width }}%; {% if width == 100 %}height: 400px;{% else %}height: {{ width }}%;{% endif %}">
+    	<p class='text-primary'>{{ event.description }}</p>
+		<div class="center-block" style="width: {{ width }}%;">
+    {% if width != 100 %}
+        <div id="good">
+        {% if users %}
+            <p>Уже там:</p>
+            <ul id="will">
+                {% for user in users %}
+                    <li class="us">{{user.user.username}}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p id="bad">Еще никого тут нет</p>
+        {% endif %}
+        </div>
+    {% endif %}
+     		{% if width != 100 %}
+            <input type="hidden" id="id" value="{{ event.id }}"><button id="go" class="btn btn-default" role="button">Я тут </sutton>{% endif %}
+     	</div>
+    </div>

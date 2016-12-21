@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset = "UTF-8">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	</head>
+
+	<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">CHEKINKO</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                     <li><a href="#edit">Создать мероприятие</a></li>
+                {% endif %}
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'reg' %}">Регистрация</a></li>
+                    <li><a href="{% url 'login' %}">Вход</a></li>
+                {% else %}
+                    <li><a href="{% url 'logout' %}">Выход</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+		<div class="header">
+			<h1 class="text-center">{{ title }}</h1>
+		</div>
+		<div class="container">
+			{% block content %}
+
+			{%endblock%}
+		</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block js %}
+		
+	{%endblock%}
+	</body>
+</html>
